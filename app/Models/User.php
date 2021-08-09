@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Model
+{
+    use HasFactory, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'nome',
+        'cpf',
+        'telefone',
+        'email',
+        'senha',
+    ];
+
+    //RELACIONAMENTOS
+    public function account()
+    {
+        return $this->hasMany('App\Models\Account', 'user_id', 'id');
+    }
+
+
+    public $timestamps = false;
+
+
+
+    // /**
+    //  * The attributes that should be hidden for arrays.
+    //  *
+    //  * @var array
+    //  */
+    // protected $hidden = [
+    //     'password',
+    //     'remember_token',
+    // ];
+
+    // /**
+    //  * The attributes that should be cast to native types.
+    //  *
+    //  * @var array
+    //  */
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
+}
